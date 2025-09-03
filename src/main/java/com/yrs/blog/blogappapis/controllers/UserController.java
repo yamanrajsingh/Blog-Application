@@ -3,6 +3,7 @@ package com.yrs.blog.blogappapis.controllers;
 import com.yrs.blog.blogappapis.payloads.UserDto;
 import com.yrs.blog.blogappapis.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,17 @@ import java.util.Map;
 @RequestMapping("/api/users/")
 
 public class UserController {
+
     @Autowired
     private UserService userService;
+
     // Post -  create User
-@PostMapping("/")
-public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+
+    @PostMapping("/")
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
     UserDto newUser =   this.userService.createUser(userDto);
     return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-
-}
+    }
 
     // Put - Update User
     @PutMapping("/{userId}")
@@ -44,6 +47,7 @@ public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
     UserDto userDto = this.userService.getUserById(userId);
     return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
+
     @GetMapping("/")
     public ResponseEntity<List<UserDto>> getAllUsers(){
     List<UserDto> userDtos = this.userService.getAllUsers();
