@@ -4,6 +4,11 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+
+# Ignore environment files
+.env
+.env.*
+
 ### STS ###
 .apt_generated
 .classpath
@@ -32,6 +37,3 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignore environment files
-.env
-.env.*
