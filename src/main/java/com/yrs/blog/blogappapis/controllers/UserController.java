@@ -2,6 +2,7 @@ package com.yrs.blog.blogappapis.controllers;
 
 import com.yrs.blog.blogappapis.payloads.UserDto;
 import com.yrs.blog.blogappapis.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users/")
-
 public class UserController {
 
     @Autowired
@@ -22,14 +22,14 @@ public class UserController {
     // Post -  create User
 
     @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> createUser( @Valid @RequestBody UserDto userDto){
     UserDto newUser =   this.userService.createUser(userDto);
     return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     // Put - Update User
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto,@PathVariable Integer userId){
+    public ResponseEntity<UserDto> updateUser( @Valid @RequestBody UserDto userDto,@PathVariable Integer userId){
     UserDto updateUser = this.userService.updateUser(userDto,userId);
     return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
