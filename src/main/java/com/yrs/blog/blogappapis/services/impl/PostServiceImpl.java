@@ -50,7 +50,7 @@ public class PostServiceImpl implements PostService {
     @Override
    public PostDto updatePost(PostDto postDto, Integer postId)
     {
-        Post post  = DtoToPost(postDto);
+        Post post  = this.DtoToPost(postDto);
         post = this.postRepo.findById(postId).orElseThrow( () -> new ResourceNotFoundException("Post","id",postId));
         post.setTitle((postDto.getTitle()));
         post.setContent((postDto.getContent()));

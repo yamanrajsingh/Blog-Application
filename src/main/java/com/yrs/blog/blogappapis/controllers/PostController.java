@@ -19,7 +19,6 @@ public class PostController {
     private PostService postService;
 
     // Post - Add Post --> Working
-
     @PostMapping("/user/{userId}/category/{categoryId}/")
     public ResponseEntity<PostDto> createPost( @Valid @RequestBody PostDto postDto,@PathVariable Integer userId, @PathVariable Integer categoryId) {
          PostDto newPost = this.postService.createPost(postDto,userId,categoryId);
@@ -27,7 +26,6 @@ public class PostController {
     }
 
     // Get - getbyId --> Working
-
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable Integer id){
         PostDto postDto = this.postService.getPostById(id);
@@ -41,14 +39,14 @@ public class PostController {
         return new ResponseEntity<>(postDtoList, HttpStatus.OK);
     }
 
-    // Put - Update Post
+    // Put - Update Post ->working
     @PutMapping("/{id}")
     public ResponseEntity<PostDto> updatePost( @Valid @RequestBody PostDto postDto, @PathVariable Integer id){
         PostDto updatePost = this.postService.updatePost(postDto,id);
         return new ResponseEntity<>(updatePost, HttpStatus.OK);
     }
 
-    // Delete Post
+    // Delete Post  -> working
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePost(@PathVariable Integer id){
         this.postService.deletePost(id);
