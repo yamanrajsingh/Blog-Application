@@ -19,16 +19,16 @@ public class Post {
     @Column(name = "post_id")
     private int id;
 
-    @Column(name = "post_title", nullable = false,  length = 100)
+    @Column(name = "post_title", nullable = false, length = 100)
     private String title;
 
-    @Column(name = "post_content", nullable = false,  length = 200)
+    @Column(name = "post_content", nullable = false, length = 200)
     private String content;
 
     @Column(name = "post_imgUrl", nullable = false)
     private String imgUrl;
 
-    @Column(name ="post_date")
+    @Column(name = "post_date")
     private Date addDate;
 
 

@@ -1,10 +1,5 @@
 package com.yrs.blog.blogappapis.payloads;
 
-
-import com.yrs.blog.blogappapis.entities.Category;
-import com.yrs.blog.blogappapis.entities.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

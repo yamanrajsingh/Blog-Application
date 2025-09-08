@@ -19,10 +19,10 @@ public class Category {
     @Column(name = "categoty_id")
     private int id;
 
-    @Column(name ="title",length=10,nullable = false)
-    private  String title;
+    @Column(name = "title", length = 10, nullable = false)
+    private String title;
 
-    @Column(name ="description",length=100,nullable = false)
+    @Column(name = "description", length = 100, nullable = false)
     private String description;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

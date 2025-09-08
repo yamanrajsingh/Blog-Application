@@ -20,7 +20,7 @@ public class CategoryDto {
     private int id;
     @NotBlank
     @Size(min = 3, max = 15, message = "Title must be minimum to 3 and maximum to 10 characters !!")
-    private  String title;
+    private String title;
     @NotBlank
     @Size(min = 3, max = 25, message = "Description must be minimum to 3 and maximum to 15 characters !!")
     private String description;

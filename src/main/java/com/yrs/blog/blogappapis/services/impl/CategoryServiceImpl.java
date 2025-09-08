@@ -24,27 +24,31 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
         Category category = DtoToCategory(categoryDto);
-        Category newCategory =  this.categoryRepo.save(category);
+        Category newCategory = this.categoryRepo.save(category);
         return CategoryToDto(newCategory);
     }
+
     @Override
-    public CategoryDto  updateCategory(CategoryDto categoryDto, Integer id) {
-        Category category = this.categoryRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Category","id",id));
+    public CategoryDto updateCategory(CategoryDto categoryDto, Integer id) {
+        Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
         category.setTitle(categoryDto.getTitle());
         category.setDescription(categoryDto.getDescription());
         Category updateCategory = this.categoryRepo.save(category);
         return CategoryToDto(updateCategory);
     }
+
     @Override
     public void deleteCategory(Integer id) {
-        Category category = this.categoryRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Category","id",id));
+        Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
         this.categoryRepo.delete(category);
     }
+
     @Override
     public CategoryDto getCategory(Integer id) {
-        Category category = this.categoryRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("Category","id",id));
+        Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
         return CategoryToDto(category);
     }
+
     @Override
     public List<CategoryDto> getAllCategories() {
         List<Category> categories = this.categoryRepo.findAll();
@@ -55,12 +59,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-    public CategoryDto CategoryToDto(Category category){
+    public CategoryDto CategoryToDto(Category category) {
         CategoryDto categoryDto = modelMapper.map(category, CategoryDto.class);
         return categoryDto;
     }
 
-    public Category DtoToCategory(CategoryDto categoryDto){
+    public Category DtoToCategory(CategoryDto categoryDto) {
         Category category = modelMapper.map(categoryDto, Category.class);
         return category;
     }
