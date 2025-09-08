@@ -13,17 +13,32 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/post")
+@RequestMapping("/api/posts/")
 public class PostController {
     @Autowired
     private PostService postService;
 
-    // Post - Add Post
+    // Post - Add Post --> Working
 
-    @PostMapping("/")
-    public ResponseEntity<PostDto> createPost( @Valid @RequestBody PostDto postDto){
-         PostDto newPost = this.postService.createPost(postDto);
+    @PostMapping("/user/{userId}/category/{categoryId}/")
+    public ResponseEntity<PostDto> createPost( @Valid @RequestBody PostDto postDto,@PathVariable Integer userId, @PathVariable Integer categoryId) {
+         PostDto newPost = this.postService.createPost(postDto,userId,categoryId);
          return new ResponseEntity<>(newPost, HttpStatus.CREATED);
+    }
+
+    // Get - getbyId --> Working
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> getPostById(@PathVariable Integer id){
+        PostDto postDto = this.postService.getPostById(id);
+        return new ResponseEntity<>(postDto, HttpStatus.OK);
+    }
+
+    // Get - all post --> Working
+    @GetMapping("/")
+    public ResponseEntity<List<PostDto>> getAllPosts(){
+        List<PostDto> postDtoList = this.postService.getAllPosts();
+        return new ResponseEntity<>(postDtoList, HttpStatus.OK);
     }
 
     // Put - Update Post
@@ -33,22 +48,25 @@ public class PostController {
         return new ResponseEntity<>(updatePost, HttpStatus.OK);
     }
 
-    // Get - getbyId
-    @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable Integer id){
-        PostDto postDto = this.postService.getPostById(id);
-        return new ResponseEntity<>(postDto, HttpStatus.OK);
-    }
-    @GetMapping("/")
-    public ResponseEntity<List<PostDto>> getAllPosts(){
-        List<PostDto> postDtoList = this.postService.getAllPosts();
-        return new ResponseEntity<>(postDtoList, HttpStatus.OK);
-    }
     // Delete Post
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePost(@PathVariable Integer id){
         this.postService.deletePost(id);
         return new ResponseEntity<>(Map.of("message","Post Delete Succesfully") ,HttpStatus.OK);
+    }
+
+    // Get By Category --> Working
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<PostDto>> findByCategory(@PathVariable Integer categoryId){
+        List<PostDto> postDtoList = this.postService.findByCategory(categoryId);
+        return new ResponseEntity<>(postDtoList, HttpStatus.OK);
+    }
+
+    // Get By User --> Working
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PostDto>> findByUser(@PathVariable Integer userId){
+        List<PostDto> postDto = this.postService.findByUser(userId);
+        return new ResponseEntity<>(postDto, HttpStatus.OK);
     }
 
 }

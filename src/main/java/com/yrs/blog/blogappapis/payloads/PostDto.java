@@ -1,6 +1,10 @@
 package com.yrs.blog.blogappapis.payloads;
 
 
+import com.yrs.blog.blogappapis.entities.Category;
+import com.yrs.blog.blogappapis.entities.User;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -13,7 +17,6 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class PostDto {
-
     private int id;
     @NotEmpty
     @Size(min = 4, max = 100, message = " Title length should be minimum 4 and maximum 100")
@@ -21,7 +24,12 @@ public class PostDto {
     @NotEmpty
     @Size(min = 4, max = 200, message = "Content length should be minimum 4 and maximum 200")
     private String content;
-    @NotEmpty
+
     private String imgUrl;
     private Date addDate;
+
+    private CategoryDto category;
+
+    private UserDto user;
+
 }

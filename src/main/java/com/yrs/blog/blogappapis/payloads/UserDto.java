@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class UserDto {
 
-    private int id;
+   private int id;
 
     @NotEmpty
     @Size(min = 3, max = 15, message = "Username must be minimum to 3 and maximum to 15 characters !!")
