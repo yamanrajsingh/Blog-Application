@@ -35,8 +35,8 @@ public class PostController {
 
     // Get - all post --> Working
     @GetMapping("/")
-    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
-        PostResponse postResponse = this.postService.getAllPosts(pageNumber, pageSize);
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize, @RequestParam(value = "sortBy", defaultValue = "addDate", required = false) String sortBy, @RequestParam(value = "sortOrder", defaultValue = "asc", required = false) String sortOrder) {
+        PostResponse postResponse = this.postService.getAllPosts(pageNumber, pageSize, sortBy, sortOrder);
         return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
     }
 
