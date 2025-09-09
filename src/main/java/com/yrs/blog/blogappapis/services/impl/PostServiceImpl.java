@@ -8,6 +8,7 @@ import com.yrs.blog.blogappapis.exceptions.ResourceNotFoundException;
 
 import com.yrs.blog.blogappapis.payloads.PostDto;
 
+import com.yrs.blog.blogappapis.payloads.PostResponse;
 import com.yrs.blog.blogappapis.repositories.CategoryRepo;
 import com.yrs.blog.blogappapis.repositories.PostRepo;
 import com.yrs.blog.blogappapis.repositories.UserRepo;
@@ -17,6 +18,9 @@ import com.yrs.blog.blogappapis.services.PostService;
 import org.modelmapper.ModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -71,10 +75,19 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPosts() {
-        List<Post> posts = this.postRepo.findAll();
-        List<PostDto> postDtos = posts.stream().map(post -> this.PostToDto(post)).collect(Collectors.toList());
-        return postDtos;
+    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber,pageSize);
+        Page<Post> posts = this.postRepo.findAll(pageable);
+        List<Post> allPosts = posts.getContent();
+        List<PostDto> postDtos = allPosts.stream().map(post -> this.PostToDto(post)).collect(Collectors.toList());
+        PostResponse postResponse = new PostResponse();
+        postResponse.setPosts(postDtos);
+        postResponse.setPageSize(posts.getSize());
+        postResponse.setPageNumber(posts.getNumber());
+        postResponse.setTotalElements(posts.getTotalElements());
+        postResponse.setTotalPages(posts.getTotalPages());
+        postResponse.setLastPage(posts.isLast());
+        return postResponse;
     }
 
     @Override

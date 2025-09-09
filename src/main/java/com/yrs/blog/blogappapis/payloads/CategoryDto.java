@@ -19,9 +19,9 @@ public class CategoryDto {
 
     private int id;
     @NotBlank
-    @Size(min = 3, max = 15, message = "Title must be minimum to 3 and maximum to 10 characters !!")
+    @Size(min = 3, max = 100, message = "Title must be minimum to 3 and maximum to 100 characters !!")
     private String title;
     @NotBlank
-    @Size(min = 3, max = 25, message = "Description must be minimum to 3 and maximum to 15 characters !!")
+    @Size(min = 3, max = 250, message = "Description must be minimum to 3 and maximum to 250 characters !!")
     private String description;
 }

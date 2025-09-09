@@ -2,6 +2,7 @@ package com.yrs.blog.blogappapis.controllers;
 
 
 import com.yrs.blog.blogappapis.payloads.PostDto;
+import com.yrs.blog.blogappapis.payloads.PostResponse;
 import com.yrs.blog.blogappapis.services.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class PostController {
 
     // Get - all post --> Working
     @GetMapping("/")
-    public ResponseEntity<List<PostDto>> getAllPosts() {
-        List<PostDto> postDtoList = this.postService.getAllPosts();
-        return new ResponseEntity<>(postDtoList, HttpStatus.OK);
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
+        PostResponse postResponse = this.postService.getAllPosts(pageNumber, pageSize);
+        return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
     }
 
     // Put - Update Post ->working
