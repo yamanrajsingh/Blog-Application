@@ -115,7 +115,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDto> searchPost(String search) {
-        return null;
+        List<Post> posts = this.postRepo.findByTitleContaining(search);
+        List<PostDto> postDto = posts.stream().map(post -> this.PostToDto(post)).collect(Collectors.toList());
+        return postDto;
     }
 
     private Post DtoToPost(PostDto postDto) {
