@@ -1,6 +1,7 @@
 package com.yrs.blog.blogappapis.controllers;
 
 
+import com.yrs.blog.blogappapis.config.AppConstant;
 import com.yrs.blog.blogappapis.payloads.PostDto;
 import com.yrs.blog.blogappapis.payloads.PostResponse;
 import com.yrs.blog.blogappapis.services.PostService;
@@ -35,7 +36,7 @@ public class PostController {
 
     // Get - all post --> Working
     @GetMapping("/")
-    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize, @RequestParam(value = "sortBy", defaultValue = "addDate", required = false) String sortBy, @RequestParam(value = "sortOrder", defaultValue = "asc", required = false) String sortOrder) {
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = AppConstant.PAGE_NUMBER, required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = AppConstant.PAGE_SIZE, required = false) Integer pageSize, @RequestParam(value = "sortBy", defaultValue = AppConstant.SORT_BY, required = false) String sortBy, @RequestParam(value = "sortOrder", defaultValue = AppConstant.SORT_ORDER, required = false) String sortOrder) {
         PostResponse postResponse = this.postService.getAllPosts(pageNumber, pageSize, sortBy, sortOrder);
         return new ResponseEntity<PostResponse>(postResponse, HttpStatus.OK);
     }
@@ -70,7 +71,7 @@ public class PostController {
 
     // search the post
     @GetMapping("/search/{search}")
-    public ResponseEntity<List<PostDto>> searchPost( @PathVariable()  String search) {
+    public ResponseEntity<List<PostDto>> searchPost(@PathVariable() String search) {
         List<PostDto> postDtoList = this.postService.searchPost(search);
         return new ResponseEntity<>(postDtoList, HttpStatus.OK);
 
