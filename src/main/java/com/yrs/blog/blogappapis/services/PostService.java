@@ -2,8 +2,10 @@ package com.yrs.blog.blogappapis.services;
 
 import com.yrs.blog.blogappapis.payloads.PostDto;
 import com.yrs.blog.blogappapis.payloads.PostResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface PostService {
     // create
