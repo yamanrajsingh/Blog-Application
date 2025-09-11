@@ -6,15 +6,19 @@ import com.yrs.blog.blogappapis.payloads.PostDto;
 import com.yrs.blog.blogappapis.payloads.PostResponse;
 import com.yrs.blog.blogappapis.services.FileService;
 import com.yrs.blog.blogappapis.services.PostService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -97,4 +101,13 @@ public class PostController {
         return ResponseEntity.ok(updatedPost);
     }
 
+    // download Image
+
+    @GetMapping(value = "/image/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public void downloadFile(@PathVariable("imageName") String imageName, HttpServletResponse response) throws IOException {
+        InputStream resource = this.fileService.downloadFile(path, imageName);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        StreamUtils.copy(resource, response.getOutputStream());
+
+    }
 }
