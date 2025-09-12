@@ -101,7 +101,7 @@ public class PostController {
         return ResponseEntity.ok(updatedPost);
     }
 
-    // download Image
+    // serve Image
 
     @GetMapping(value = "/image/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
     public void downloadFile(@PathVariable("imageName") String imageName, HttpServletResponse response) throws IOException {
