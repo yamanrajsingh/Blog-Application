@@ -5,6 +5,7 @@ import com.yrs.blog.blogappapis.entities.Post;
 import com.yrs.blog.blogappapis.entities.User;
 import com.yrs.blog.blogappapis.exceptions.ResourceNotFoundException;
 import com.yrs.blog.blogappapis.payloads.CommentDto;
+import com.yrs.blog.blogappapis.payloads.PostDto;
 import com.yrs.blog.blogappapis.repositories.CommentRepo;
 import com.yrs.blog.blogappapis.repositories.PostRepo;
 import com.yrs.blog.blogappapis.repositories.UserRepo;
@@ -13,8 +14,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -33,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
         User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
         Post post = this.postRepo.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
         Comment comment = this.modelMapper.map(commentDto, Comment.class);
-//        comment.setUser(user);
+        comment.setUser(user);
         comment.setPost(post);
         comment.setAddDate(new Date());
         Comment newComment = this.commentRepo.save(comment);
@@ -42,16 +45,20 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteCommentById(Integer commentId) {
-        return;
+        this.commentRepo.deleteById(commentId);
+
     }
 
     @Override
-    public List<CommentRepo> getAllCommentsByPostId(Integer postId) {
-        return null;
+    public List<CommentDto> getAllCommentsByPostId(Integer postId) {
+        Post post = this.postRepo.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+        List<Comment> comments = this.commentRepo.findAllByPost(post);
+        List<CommentDto> commentDtos  = comments.stream().map(comment -> this.modelMapper.map(comment,CommentDto.class)).collect(Collectors.toList());
+        return commentDtos;
     }
 
     @Override
-    public List<CommentRepo> getAllCommentsByUserId(Integer userId) {
+    public List<CommentDto> getAllCommentsByUserId(Integer userId) {
         return null;
     }
 

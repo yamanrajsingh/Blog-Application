@@ -11,9 +11,9 @@ public interface CommentService {
 
     void deleteCommentById(Integer commentId);
 
-    List<CommentRepo> getAllCommentsByPostId(Integer postId);
+    List<CommentDto> getAllCommentsByPostId(Integer postId);
 
-    List<CommentRepo> getAllCommentsByUserId(Integer userId);
+    List<CommentDto> getAllCommentsByUserId(Integer userId);
 
     CommentDto updateComment(CommentDto commentDto, Integer commentId, Integer userId);
 

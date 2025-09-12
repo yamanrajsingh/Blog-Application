@@ -1,5 +1,4 @@
 package com.yrs.blog.blogappapis.entities;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
