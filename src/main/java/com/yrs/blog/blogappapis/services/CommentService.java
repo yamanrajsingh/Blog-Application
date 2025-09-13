@@ -13,9 +13,9 @@ public interface CommentService {
 
     List<CommentDto> getAllCommentsByPostId(Integer postId);
 
-    List<CommentDto> getAllCommentsByUserId(Integer userId);
+//    List<CommentDto> getAllCommentsByUserId(Integer userId);
 
-    CommentDto updateComment(CommentDto commentDto, Integer commentId, Integer userId);
+//    CommentDto updateComment(CommentDto commentDto, Integer commentId, Integer userId);
 
 
 }

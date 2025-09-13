@@ -37,5 +37,4 @@ public class CommentController {
         return new ResponseEntity<>(commentDtoList, HttpStatus.OK);
     }
 
-
 }

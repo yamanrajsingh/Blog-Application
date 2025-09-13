@@ -1,5 +1,6 @@
 package com.yrs.blog.blogappapis.payloads;
 
+import com.yrs.blog.blogappapis.entities.Comment;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +26,8 @@ public class PostDto {
     private Date addDate;
 
     private CategoryDto category;
+
+    private List<CommentDto> comments;
 
     private UserDto user;
 

@@ -57,13 +57,4 @@ public class CommentServiceImpl implements CommentService {
         return commentDtos;
     }
 
-    @Override
-    public List<CommentDto> getAllCommentsByUserId(Integer userId) {
-        return null;
-    }
-
-    @Override
-    public CommentDto updateComment(CommentDto commentDto, Integer commentId, Integer userId) {
-        return null;
-    }
 }
