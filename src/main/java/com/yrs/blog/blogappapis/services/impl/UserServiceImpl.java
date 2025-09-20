@@ -7,6 +7,8 @@ import com.yrs.blog.blogappapis.repositories.UserRepo;
 import com.yrs.blog.blogappapis.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +22,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = this.dtoToUser(userDto);
+        user.setPassword(this.passwordEncoder.encode(userDto.getPassword()));
         User savedUser = this.userRepo.save(user);
         return this.userToUserDto(savedUser);
     }

@@ -1,9 +1,12 @@
 package com.yrs.blog.blogappapis.payloads;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class AuthJwtResoponse {
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class JwtResponse {
     private String token;
 }

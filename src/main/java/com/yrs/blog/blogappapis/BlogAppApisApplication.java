@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class BlogAppApisApplication implements CommandLineRunner {
+public class BlogAppApisApplication  {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -25,8 +25,5 @@ public class BlogAppApisApplication implements CommandLineRunner {
         return new ModelMapper();
     }
 
-    public void run(String... args) throws Exception {
-        System.out.println(this.passwordEncoder.encode("12345"));
-    }
 
 }
