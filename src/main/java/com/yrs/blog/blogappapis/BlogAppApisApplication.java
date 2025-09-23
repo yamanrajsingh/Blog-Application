@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class BlogAppApisApplication  {
+public class BlogAppApisApplication {
 
     @Autowired
     private PasswordEncoder passwordEncoder;

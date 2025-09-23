@@ -1,4 +1,5 @@
 package com.yrs.blog.blogappapis.payloads;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class CommentDto {
     private String comment;
     private Date date;
     private UserDto user;
-//    private PostDto post;
+    //    private PostDto post;
     private int postID;
 
 }

@@ -32,10 +32,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // disable CSRF for JWT
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // allow login/signup
+                                .requestMatchers("/api/auth/**").permitAll() // allow login/signup
 //                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
 //                        .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-                        .anyRequest().authenticated()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

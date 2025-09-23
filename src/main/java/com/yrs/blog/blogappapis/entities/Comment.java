@@ -1,4 +1,5 @@
 package com.yrs.blog.blogappapis.entities;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -25,7 +25,7 @@ public class CommentController {
 
     // Delete Comment
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteComment(@PathVariable Integer id ) {
+    public ResponseEntity<?> deleteComment(@PathVariable Integer id) {
         this.commentService.deleteCommentById(id);
         return new ResponseEntity<>(Map.of("message", "Comment Delete Succesfully"), HttpStatus.OK);
     }
@@ -33,7 +33,7 @@ public class CommentController {
     // Get all by Post
     @GetMapping("/post/{postId}")
     public ResponseEntity<List<CommentDto>> getAllCommentsByPostId(@PathVariable Integer postId) {
-        List<CommentDto>  commentDtoList = this.commentService.getAllCommentsByPostId(postId);
+        List<CommentDto> commentDtoList = this.commentService.getAllCommentsByPostId(postId);
         return new ResponseEntity<>(commentDtoList, HttpStatus.OK);
     }
 
