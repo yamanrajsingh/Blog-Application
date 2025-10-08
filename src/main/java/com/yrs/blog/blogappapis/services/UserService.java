@@ -8,6 +8,9 @@ import java.util.List;
 
 @Service
 public interface UserService {
+
+    UserDto registerUser(UserDto userDto);
+
     UserDto createUser(UserDto user);
 
     UserDto updateUser(UserDto user, Integer userId);

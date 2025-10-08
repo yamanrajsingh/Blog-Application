@@ -1,8 +1,11 @@
 package com.yrs.blog.blogappapis.services.impl;
 
+import com.yrs.blog.blogappapis.config.AppConstant;
+import com.yrs.blog.blogappapis.entities.Role;
 import com.yrs.blog.blogappapis.entities.User;
 import com.yrs.blog.blogappapis.exceptions.ResourceNotFoundException;
 import com.yrs.blog.blogappapis.payloads.UserDto;
+import com.yrs.blog.blogappapis.repositories.RoleRepo;
 import com.yrs.blog.blogappapis.repositories.UserRepo;
 import com.yrs.blog.blogappapis.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -24,6 +27,19 @@ public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepo roleRepo;
+
+    @Override
+    public UserDto registerUser(UserDto userDto) {
+        User user = modelMapper.map(userDto, User.class);
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        Role role = this.roleRepo.findById(AppConstant.NORMAL_USER).get();
+        user.getRoles().add(role);
+        User newUser = this.userRepo.save(user);
+        UserDto newUserDto = this.modelMapper.map(newUser, UserDto.class);
+        return newUserDto;
+    }
 
     @Override
     public UserDto createUser(UserDto userDto) {
